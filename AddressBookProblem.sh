@@ -105,3 +105,35 @@ else
 fi
 
 exit 0
+
+#delete.sh
+#!/bin/bash
+
+# Ask the user which line to delete
+echo -n "Enter the line number to delete: "
+read number
+
+# Display the record selected
+awk -v var=$number -F ";" 'NR ~ var {printf " %d,%s,%s,%s,%s,%s,%s,%s\n", NR, $1, $2, $3, $4, $5, $6, $7}' $BOOK
+
+# Ask the user if this is correct before deleting.
+echo -n "Can i delete the above entry? (y/n): "
+read answer
+
+# Lower case the answer and check
+newanswer=`echo $answer | tr "A-Z" "a-z"`;
+
+if [ "$newanswer" = "y" ]
+then
+
+      # Rename the file before deleting
+      mv $BOOK boo.txt
+
+      # Add line numbers and delete against that number
+      nl --number-format=rz --number-separator=":" boo.txt | grep -v 0$number: | awk -F: '{print $2}' |  tee $BOOK
+
+else
+      echo "Did not delete the entry"
+fi
+
+

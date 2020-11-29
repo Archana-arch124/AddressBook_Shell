@@ -137,3 +137,40 @@ else
 fi
 
 
+#Addressbook
+#!/bin/bash
+# Name of address book
+BOOK="address-book2.txt"
+
+export BOOK
+exit=0
+
+while [ $exit -ne 1 ]
+do
+      clear
+      echo "Enter the operation to perform?"
+      echo -e "add, display, find, delete, exit: "
+      read answer
+
+      if [ "$answer" = "add" ]
+      then
+                ./add.sh
+      elif [ "$answer" = "display" ]
+      then
+                ./display.sh
+      elif [ "$answer" = "find" ]
+      then
+                ./find.sh
+      elif [ "$answer" = "delete" ]
+      then
+                ./delete.sh
+      elif [ "$answer" = "exit" ]
+      then
+                exit=1
+      else
+              echo " Command is Invalid."
+      fi
+done
+
+exit 0
+

@@ -34,3 +34,13 @@ else
 fi
 
 exit 0
+
+
+#display
+
+#!/bin/bash
+
+# Read each line in the book and display
+(awk -F ";" '{printf " %d,%s,%s,%s,%s,%s,%s,%s\n", NR, $1, $2, $3, $4, $5, $6, $7}' $BOOK ;
+ echo "Press Q to Quit and return to main menu." ) | less
+
